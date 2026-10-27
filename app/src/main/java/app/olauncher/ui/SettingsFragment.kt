@@ -336,6 +336,15 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     private fun toggleStatusBar() {
         prefs.showStatusBar = !prefs.showStatusBar
         populateStatusBar()
+
+        // New logic: hide battery percentage when status bar is shown
+        if (prefs.showStatusBar) {
+            prefs.showBatteryPercent = false
+        }
+        // Update UI row visibility
+        updateBatteryToggleVisibility()
+        prefs.showStatusBar = !prefs.showStatusBar
+        populateStatusBar()
     }
 
     private fun populateStatusBar() {
